@@ -1,0 +1,44 @@
+KENDİ MODÜLÜMÜZ
+Node.js'de kendi modüllerimizi oluşturmak oldukça kolaydır. Bir modül, JavaScript kodunu içeren bir dosyadır. Bu dosya, modül olarak kullanılmak üzere diğer dosyalarda içe aktarılabilecek fonksiyonlar, sınıflar veya objeler içerir.
+Kendi modülümüzü oluşturmak için aşağıdaki adımları izleyebiliriz:
+Bir JavaScript dosyası oluşturun ve modül kodlarını bu dosyaya yazın. Örneğin, "myModule.js" adlı bir dosya oluşturalım ve içinde aşağıdaki kodu yazalım:
+
+// myModule.js
+function sayHello(name) {
+  console.log(`Hello ${name}!`);
+}
+module.exports = {
+  sayHello
+};
+
+Modülümüzü kullanacağımız dosyada (örneğin "app.js" dosyası), modül dosyasını içe aktarmak için require() fonksiyonunu kullanalım:
+// app.js
+const myModule = require('./myModule');
+myModule.sayHello('John');
+
+require() fonksiyonu, modül dosyasının yolunu alır ve bu dosyadaki modül kodlarını çalıştırır. Modül dosyası module.exports özelliği tarafından dışa aktarılan objeleri döndürür. Bu objeler, require() fonksiyonu tarafından içe aktarılabilir.
+Uygulamayı çalıştırın:
+node app.js
+Bu örnekte, myModule.js dosyasındaki sayHello() fonksiyonunu kullanarak "Hello John!" mesajını konsol ekranında görmeliyiz.
+Bu şekilde, kendi modülümüzü oluşturarak, daha sonra tekrar kullanabileceğimiz kodları yeniden kullanılabilir hale getirebiliriz.
+
+Kendi modülümüzde kullanabileceğimiz fonksiyonları tanımlamak için örnek bir kod bloğu aşağıdaki gibi olabilir:
+// myModule.js
+function add(a, b) {
+  return a + b;
+}
+
+function subtract(a, b) {
+  return a - b;
+}
+module.exports = {
+  add: add,
+  subtract: subtract
+};
+Burada, add() ve subtract() fonksiyonlarını tanımladık ve bunları modülümüz dışında kullanılabilir hale getirmek için module.exports nesnesine ekledik.
+Daha sonra, bu modülü başka bir dosyada kullanmak istediğimizde require() fonksiyonunu kullanarak çağırabiliriz:
+// app.js
+const myModule = require('./myModule');
+console.log(myModule.add(2, 3)); // 5
+console.log(myModule.subtract(5, 2)); // 3
+Burada myModule adında bir nesne oluşturduk ve myModule.js dosyasında tanımladığımız add() ve subtract() fonksiyonlarına erişebildik.
